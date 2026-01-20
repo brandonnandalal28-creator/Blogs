@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    header {
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid #1e293b;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    header p {
+      color: #94a3b8;
+      margin-top: 0.5rem;
+    }
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    input {
+      padding: 0.75rem;
+      width: 100%;
+      background: #020617;
+      border: 1px solid #1e293b;
+      color: #e5e7eb;
+      border-radius: 0.5rem;
+    }
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .post {
+      background: #020617;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #1e293b;
+      transition: transform 0.2s ease;
+    }
+    .post:hover {
+      transform: translateY(-4px);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Modern Blog</h1>
+    <p>Thoughts, ideas, and stories — coming soon</p>
+  </header>
+
+  <main>
+    <input type="text" id="search" placeholder="Search posts..." />
+    <section class="posts" id="posts"></section>
+  </main>
+
+  <footer>
+    © 2026 • My Blog
+  </footer>
+
+  <script>
+    const posts = [
+      { title: "Welcome to My Blog", excerpt: "This is your first blog post placeholder." },
+      { title: "Why I Started Writing", excerpt: "A story about curiosity and ideas." },
+      { title: "What's Next", excerpt: "More posts coming soon." }
+    ];
+
+    const postsContainer = document.getElementById('posts');
+    const searchInput = document.getElementById('search');
+
+    function renderPosts(filter = "") {
+      postsContainer.innerHTML = "";
+      posts
+        .filter(p => p.title.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'post';
+          div.innerHTML = `<h2>${p.title}</h2><p>${p.excerpt}</p>`;
+          postsContainer.appendChild(div);
+        });
+    }
+
+    searchInput.addEventListener('input', e => {
+      renderPosts(e.target.value);
+    });
+
+    renderPosts();
+  </script>
+</body>
+</html>
